@@ -2,9 +2,9 @@ import { Outlet } from 'react-router-dom'
 
 function Layout() {
   return (
-    <div>
+    <main className='w-[600px] h-[600px] bg-white'>
       <Outlet />
-    </div>
+    </main>
   )
 }
 
