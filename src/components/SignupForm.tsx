@@ -1,5 +1,6 @@
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, FormEvent, useState } from 'react'
 import {MdOutlineMail, MdOutlineLock} from 'react-icons/md'
+import { Link } from 'react-router-dom'
 
 const DIV_STYLE = 'mb-8 flex flex-col gap-4'
 const LABEL_STYLE = 'text-lg inline-flex items-center gap-1'
@@ -10,7 +11,7 @@ function SignupForm() {
   const [info, setInfo] = useState({email:'', password:''})
   const [isValidate, setIsValidate] = useState({email:false, password:false})
 
-  const onChange = (e:ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e:ChangeEvent<HTMLInputElement>) => {
     const {id,value} = e.target;
     setInfo({...info, [id]:value})
     if(id === 'email'){
@@ -20,24 +21,27 @@ function SignupForm() {
       setIsValidate({...isValidate, password: value.length >= 8 ? true :false})
     }
   }
+  const handleSubmit = (e:FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+  }
 
   const isDisabled = info.email && info.password && isValidate.email && isValidate.password ? false : true
   return (
-    <form className='w-full px-10'>
+    <form className='w-full px-10' onSubmit={handleSubmit}>
       <div className={DIV_STYLE}>
         <label className={LABEL_STYLE} htmlFor='email'>
           <MdOutlineMail className='text-2xl' /> 이메일</label>
-        <input className={INPUT_STYLE} type='email' data-testid='email-input' id='email' onChange={onChange} value={info.email} placeholder='test@test.com' />
+        <input className={INPUT_STYLE} type='email' data-testid='email-input' id='email' onChange={handleChange} value={info.email} placeholder='test@test.com' />
         <p className={`${TEXT_STYLE} ${info.email && !isValidate.email && 'text-red-500'}`}>이메일 형식에 맞게 입력해주세요.</p>
       </div>
       <div className={DIV_STYLE}>
         <label className={LABEL_STYLE} htmlFor='password'>
           <MdOutlineLock className='text-2xl' /> 비밀번호</label>
-        <input className={INPUT_STYLE} type='password' data-testid='password-input' id='password' onChange={onChange} value={info.password} placeholder='비밀번호를 입력해주세요' />
+        <input className={INPUT_STYLE} type='password' data-testid='password-input' id='password' onChange={handleChange} value={info.password} placeholder='비밀번호를 입력해주세요' />
         <p className={`${TEXT_STYLE} ${info.password && !isValidate.password && 'text-red-500'}`}>비밀번호를 8자리 이상 입력해주세요.</p>
       </div>
       <div className='flex w-full gap-4'>
-      <button className='w-1/2 py-3 border-4 rounded-lg border-[#ffdc72] hover:bg-[#ffdc72]'>로그인하러 가기</button>
+      <Link to='/signin' className='w-1/2 py-3 border-4 rounded-lg text-center border-[#ffdc72] hover:bg-[#ffdc72]'>로그인하러 가기</Link >
       <button className={`w-1/2 rounded-lg py-3 ${isDisabled ? 'bg-gray-300' : 'bg-[#ffdc72] hover:bg-[#ffd278]'}`} disabled={isDisabled}>회원가입</button>
       </div>
     </form>
