@@ -1,9 +1,11 @@
-import React from 'react'
+import AddTodoForm from '../components/AddTodoForm';
 
 function Todo() {
-  return (
-    <div>Todo</div>
-  )
+	return (
+		<div>
+			<AddTodoForm />
+		</div>
+	);
 }
 
-export default Todo
+export default Todo;
