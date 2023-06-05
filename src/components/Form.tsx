@@ -95,6 +95,7 @@ function Form() {
 				</Link>
 				<button
 					className={`w-1/2 rounded-lg py-3 ${isDisabled ? 'bg-gray-300' : 'bg-[#ffdc72] hover:bg-[#ffd278]'}`}
+					data-testid={pathname === '/signup' ? 'signup-button' : 'signin-button'}
 					disabled={isDisabled}>
 					{pathname === '/signup' ? '회원가입' : '로그인'}
 				</button>
