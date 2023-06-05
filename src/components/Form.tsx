@@ -1,7 +1,7 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { MdOutlineMail, MdOutlineLock } from 'react-icons/md';
-import { Link, useNavigate } from 'react-router-dom';
-import { signup } from '../apis/auth';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { signin, signup } from '../apis/auth';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 
@@ -10,11 +10,13 @@ const LABEL_STYLE = 'text-lg inline-flex items-center gap-1';
 const INPUT_STYLE = 'rounded-3xl border-2 px-6 py-2 focus:outline-slate-600';
 const TEXT_STYLE = 'text-gray-500 px-2';
 
-function SignupForm() {
+function Form() {
 	const MySwal = withReactContent(Swal);
 	const [account, setAccount] = useState({ email: '', password: '' });
 	const [isValidate, setIsValidate] = useState({ email: false, password: false });
+	const { pathname } = useLocation();
 	const navigate = useNavigate();
+
 	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
 		const { id, value } = e.target;
 		setAccount({ ...account, [id]: value });
@@ -27,9 +29,9 @@ function SignupForm() {
 	};
 	const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		const result = await signup(account);
+		const result = pathname === 'signup' ? await signup(account) : await signin(account);
 		const { data, status } = result;
-		if (status !== 201) {
+		if (status !== 201 && status !== 200) {
 			MySwal.fire({
 				title: <p>{data.message}</p>,
 				icon: 'error',
@@ -42,6 +44,9 @@ function SignupForm() {
 			}).then(() => {
 				navigate('/signin');
 			});
+		}
+		if (status === 200) {
+			navigate('/todo');
 		}
 	};
 
@@ -83,17 +88,19 @@ function SignupForm() {
 				</p>
 			</div>
 			<div className='flex w-full gap-4'>
-				<Link to='/signin' className='w-1/2 py-3 border-4 rounded-lg text-center border-[#ffdc72] hover:bg-[#ffdc72]'>
-					로그인하러 가기
+				<Link
+					to={pathname === '/signup' ? '/signin' : '/signup'}
+					className='w-1/2 py-3 border-4 rounded-lg text-center border-[#ffdc72] hover:bg-[#ffdc72]'>
+					{pathname === '/signup' ? '로그인하러 가기' : '회원가입하러 가기'}
 				</Link>
 				<button
 					className={`w-1/2 rounded-lg py-3 ${isDisabled ? 'bg-gray-300' : 'bg-[#ffdc72] hover:bg-[#ffd278]'}`}
 					disabled={isDisabled}>
-					회원가입
+					{pathname === '/signup' ? '회원가입' : '로그인'}
 				</button>
 			</div>
 		</form>
 	);
 }
 
-export default SignupForm;
+export default Form;
