@@ -1,16 +1,16 @@
-import axios, { AxiosRequestConfig } from 'axios'
+import axios, { AxiosRequestConfig } from 'axios';
 
 const getAxiosInstance = () => {
-  const config: AxiosRequestConfig = {
-    baseURL: process.env.REACT_APP_API_URL,
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  }
+	const config: AxiosRequestConfig = {
+		baseURL: 'https://www.pre-onboarding-selection-task.shop',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+	};
 
-  const instance = axios.create(config)
+	const instance = axios.create(config);
 
-  return instance
-}
+	return instance;
+};
 
-export const axiosInstance = getAxiosInstance()
+export const axiosInstance = getAxiosInstance();
