@@ -10,3 +10,11 @@
 	width: 100vw;
 	height: 100vh;
 }
+
+button {
+	cursor: pointer;
+}
+
+* {
+	transition: all 0.3s ease;
+}
