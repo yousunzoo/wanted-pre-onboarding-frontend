@@ -46,6 +46,8 @@ function Form() {
 			});
 		}
 		if (status === 200) {
+			const { access_token } = data;
+			localStorage.setItem('access_token', access_token);
 			navigate('/todo');
 		}
 	};
