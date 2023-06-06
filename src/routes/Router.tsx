@@ -11,10 +11,10 @@ function Router() {
 		<BrowserRouter>
 			<Routes>
 				<Route path='/' element={<Layout />}>
-					<Route path='/' element={<Home />} />
-					<Route path='signin' element={<Signin />} />
-					<Route path='signup' element={<Signup />} />
 					<Route element={<ProtectedRouter />}>
+						<Route path='/' element={<Home />} />
+						<Route path='signin' element={<Signin />} />
+						<Route path='signup' element={<Signup />} />
 						<Route path='todo' element={<Todo />} />
 					</Route>
 				</Route>
