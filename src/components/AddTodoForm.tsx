@@ -26,7 +26,7 @@ function AddTodoForm({ refetch }: AddTodoFormProps) {
 		}
 	};
 	return (
-		<form className='relative border-4 overflow-hidden rounded-3xl mx-auto w-[300px]' onSubmit={handleSubmit}>
+		<form className='relative border-4 overflow-hidden rounded-3xl mx-auto w-[300px] mb-10' onSubmit={handleSubmit}>
 			<input
 				className='outline-none w-4/5 px-4 py-2'
 				data-testid='new-todo-input'
