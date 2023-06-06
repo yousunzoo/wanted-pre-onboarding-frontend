@@ -9,6 +9,7 @@ const useSetTodosByResponse: UseSetTodosByResponse = () => {
 	const [todos, setTodos] = useState<Todos>([]);
 	const [isLoading, setIsLoading] = useState(true);
 	const setTodosByResponse = async () => {
+		setIsLoading(true);
 		const { data } = await getTodos();
 		setTodos(data);
 		setIsLoading(false);
