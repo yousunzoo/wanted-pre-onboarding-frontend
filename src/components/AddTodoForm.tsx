@@ -2,7 +2,10 @@ import { ChangeEvent, FormEvent, useState } from 'react';
 import { addTodo } from '../apis/todo';
 import Swal from 'sweetalert2';
 
-function AddTodoForm() {
+interface AddTodoFormProps {
+	refetch: () => Promise<void>;
+}
+function AddTodoForm({ refetch }: AddTodoFormProps) {
 	const [todo, setTodo] = useState('');
 
 	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -14,6 +17,7 @@ function AddTodoForm() {
 		const { status } = await addTodo(todo);
 		if (status === 201) {
 			setTodo('');
+			refetch();
 		} else {
 			Swal.fire({
 				title: '<p>잠시 후 다시 시도해주세요</p>',
