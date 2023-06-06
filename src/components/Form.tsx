@@ -29,7 +29,7 @@ function Form() {
 	};
 	const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		const result = pathname === 'signup' ? await signup(account) : await signin(account);
+		const result = pathname === '/signup' ? await signup(account) : await signin(account);
 		const { data, status } = result;
 		if (status !== 201 && status !== 200) {
 			MySwal.fire({
