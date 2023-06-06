@@ -1,23 +1,14 @@
-import { Outlet, useNavigate } from 'react-router-dom';
-import Swal from 'sweetalert2';
+import { Navigate, Outlet, useLocation, useNavigate } from 'react-router-dom';
 
 function ProtectedRouter() {
 	const access_token = localStorage.getItem('access_token');
-	const navigate = useNavigate();
+	const { pathname } = useLocation();
 
-	if (!access_token) {
-		Swal.fire({
-			title: '<p>로그인이 필요한 영역입니다.</p>',
-			icon: 'warning',
-		}).then(() => {
-			navigate('/signin');
-		});
+	if (pathname === '/todo') {
+		return access_token ? <Outlet /> : <Navigate to='/signin' replace />;
+	} else {
+		return access_token ? <Navigate to='/todo' replace /> : <Outlet />;
 	}
-	return (
-		<>
-			<Outlet />
-		</>
-	);
 }
 
 export default ProtectedRouter;

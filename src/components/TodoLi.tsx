@@ -11,14 +11,14 @@ function TodoLi({ data }: TodoLiProps) {
 	const [isDone, setIsDone] = useState(isCompleted);
 	const [isEditMode, setIsEditMode] = useState(false);
 
-	const handleClick = () => {
+	const handleChange = () => {
 		setIsDone(!isDone);
 	};
 	return (
 		<li className='flex w-full pb-2 border-b-2 border-slate-300 items-center mb-4 text-lg'>
 			<label className='mr-2 text-2xl w-1/12' htmlFor={`${id}-isCompleted`}>
 				{isDone ? <MdOutlineCheckBox /> : <MdOutlineCheckBoxOutlineBlank />}
-				<input className='hidden' type='checkbox' id={`${id}-isCompleted`} checked={isDone} onClick={handleClick} />
+				<input className='hidden' type='checkbox' id={`${id}-isCompleted`} checked={isDone} onChange={handleChange} />
 			</label>
 			<p className='w-8/12'>{todo}</p>
 			<div className='flex w-3/12 justify-between'>
