@@ -10,8 +10,7 @@ function Todo() {
 		<div>
 			<AddTodoForm refetch={setTodosByResponse} />
 			<section className='flex w-full justify-center items-center h-[400px] border-4 rounded-2xl p-5'>
-				<Spinner />
-				{/* {isLoading ? <Spinner /> : <TodoList todos={todos} />} */}
+				{isLoading ? <Spinner /> : <TodoList todos={todos} />}
 			</section>
 		</div>
 	);
