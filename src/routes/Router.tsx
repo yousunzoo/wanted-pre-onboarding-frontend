@@ -5,6 +5,7 @@ import Signin from '../pages/Signin';
 import Todo from '../pages/Todo';
 import Home from '../pages/Home';
 import ProtectedRouter from './ProtectedRouter';
+import NotFound from '../pages/NotFound';
 
 function Router() {
 	return (
@@ -18,6 +19,7 @@ function Router() {
 						<Route path='todo' element={<Todo />} />
 					</Route>
 				</Route>
+				<Route path='/*' element={<NotFound />} />
 			</Routes>
 		</BrowserRouter>
 	);
