@@ -10,7 +10,7 @@ const LABEL_STYLE = 'text-lg inline-flex items-center gap-1';
 const INPUT_STYLE = 'rounded-3xl border-2 px-6 py-2 focus:outline-slate-600';
 const TEXT_STYLE = 'text-gray-500 px-2';
 
-function Form() {
+function AccountForm() {
 	const MySwal = withReactContent(Swal);
 	const [account, setAccount] = useState({ email: '', password: '' });
 	const [isValidate, setIsValidate] = useState({ email: false, password: false });
@@ -53,6 +53,7 @@ function Form() {
 	};
 
 	const isDisabled = account.email && account.password && isValidate.email && isValidate.password ? false : true;
+
 	return (
 		<form className='w-full px-10' onSubmit={handleSubmit}>
 			<div className={DIV_STYLE}>
@@ -106,4 +107,4 @@ function Form() {
 	);
 }
 
-export default Form;
+export default AccountForm;
