@@ -49,6 +49,7 @@ function TodoLi(props: TodoLiProps) {
 						value={todo}
 						autoFocus
 						onChange={handleEdit}
+						data-testid='modify-input'
 					/>
 					<div className='flex w-3/12 ml-2 justify-between'>
 						<button className={`${BUTTON_STYLE} border-green-500`} onClick={handleSubmit} data-testid='submit-button'>
